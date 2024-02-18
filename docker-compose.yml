@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PROXY_URL=${PROXY_URL}
+      - DIGEST_USER=${DIGEST_USER}
+      - DIGEST_PW=${DIGEST_PW}
