@@ -1,4 +1,4 @@
-FROM node:18.19.1-alpine3.19 as builder
+FROM node:20.11.1-alpine3.19 as builder
 
 WORKDIR /app
 
@@ -9,7 +9,7 @@ RUN chmod +x /tini
 COPY package.json package-lock.json index.ts tsconfig.json ./
 RUN npm ci && npm run build
 
-FROM node:18.19.1-alpine3.19
+FROM node:20.11.1-alpine3.19
 ENV NODE_ENV production
 ENV PORT 3000
 
