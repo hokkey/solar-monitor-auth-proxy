@@ -8,11 +8,15 @@ const PORT = Number(process.env.PORT)
 const SOLAR_MONITOR_BASE_URL = process.env.SOLAR_MONITOR_BASE_URL
 const DIGEST_AUTH_USER = process.env.SOLAR_MONITOR_AUTH_USER
 const DIGEST_AUTH_PW = process.env.SOLAR_MONITOR_AUTH_PW
+const FRAME_ANCESTORS = process.env.SOLAR_MONITOR_FRAME_ANCESTORS ?? "'none'"
 
 // Setup endpoint
 const app = express()
 app.disable('x-powered-by')
 
+
+// Almost the same CSP config of the original, but the ancestor is customizable
+const CSP_VALUES = `script-src 'unsafe-eval' 'unsafe-inline' 'self'; style-src 'unsafe-inline' 'self'; img-src 'self' data: 127.0.0.1; object-src 'none'; frame-ancestors ${FRAME_ANCESTORS}`
 
 app.get('*', async (req, res) => {
   try {
@@ -31,9 +35,13 @@ app.get('*', async (req, res) => {
      * using writeHead to avoid the default charset adding
      */
     const headers: Record<string, string> = {}
+    const CSP = 'content-security-policy'
     response.headers.forEach((value, key) => {
-      headers[key] = value
+      if (value === CSP) {
+        headers[key] = value
+      }
     })
+    headers[CSP] = CSP_VALUES
     res.writeHead(response.status, headers)
 
     /**
