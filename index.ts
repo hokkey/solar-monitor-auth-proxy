@@ -5,9 +5,9 @@ import { config } from 'dotenv'
 // Environment variables
 config()
 const PORT = Number(process.env.PORT)
-const PROXY_BASE_URL = process.env.PROXY_BASE_URL
-const DIGEST_AUTH_USER = process.env.PROXY_AUTH_USER
-const DIGEST_AUTH_PW = process.env.PROXY_AUTH_PW
+const SOLAR_MONITOR_BASE_URL = process.env.SOLAR_MONITOR_BASE_URL
+const DIGEST_AUTH_USER = process.env.SOLAR_MONITOR_AUTH_USER
+const DIGEST_AUTH_PW = process.env.SOLAR_MONITOR_AUTH_PW
 
 // Setup endpoint
 const app = express()
@@ -18,7 +18,7 @@ app.get('*', async (req, res) => {
      * Fetch target url with digest auth
      */
     const client = new DigestClient(DIGEST_AUTH_USER, DIGEST_AUTH_PW)
-    const targetUrl = `${PROXY_BASE_URL}${req.originalUrl}`
+    const targetUrl = `${SOLAR_MONITOR_BASE_URL}${req.originalUrl}`
     const response = await client.fetch(targetUrl, {
       method: 'GET',
       headers: { ...req.headers, host: new URL(targetUrl).host },

@@ -17,6 +17,6 @@ The proxy must be installed on a network that allows direct connection to the so
 
 ## Environment Variables
 
-- PROXY_BASE_URL - The URL for the solar monitor to connect to, such as a local IP address http://192.168.1.1. Does not support URLs like http://solar-monitor.local.
-- PROXY_AUTH_USER - The login username for the solar monitor.
-- PROXY_AUTH_PW - The login password for the solar monitor.
+- SOLAR_MONITOR_BASE_URL - The URL for the solar monitor to connect to, such as a local IP address http://192.168.1.1. Does not support URLs like http://solar-monitor.local.
+- SOLAR_MONITOR_AUTH_USER - The login username for the solar monitor.
+- SOLAR_MONITOR_AUTH_PW - The login password for the solar monitor.
