@@ -11,6 +11,8 @@ const DIGEST_AUTH_PW = process.env.SOLAR_MONITOR_AUTH_PW
 
 // Setup endpoint
 const app = express()
+app.disable('x-powered-by')
+
 
 app.get('*', async (req, res) => {
   try {
