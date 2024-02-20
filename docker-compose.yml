@@ -5,6 +5,6 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - PROXY_URL=${PROXY_URL}
-      - DIGEST_USER=${DIGEST_USER}
-      - DIGEST_PW=${DIGEST_PW}
+      - PROXY_BASE_URL=${PROXY_BASE_URL}
+      - PROXY_AUTH_USER=${PROXY_AUTH_USER}
+      - PROXY_AUTH_PW=${PROXY_AUTH_PW}

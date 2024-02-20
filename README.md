@@ -16,7 +16,7 @@ solar-monitorはダイジェスト認証でログインする仕組みのため�
 
 ### 環境変数
 
-- **PROXY_URL** - 接続先となるsolar monitorのURL
+- **PROXY_BASE_URL** - 接続先となるsolar monitorのURL
   - 例 `http://192.168.1.1` などのローカルIPアドレス。`http://solar-monitor.local`には未対応です
-- **DIGEST_USER** - solar-monitorのログインユーザー名
-- **DIGEST_PW** - solar-monitorのログインパスワード
+- **PROXY_AUTH_USER** - solar-monitorのログインユーザー名
+- **PROXY_AUTH_PW** - solar-monitorのログインパスワード
