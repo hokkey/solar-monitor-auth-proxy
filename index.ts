@@ -28,10 +28,9 @@ app.get('*', async (req, res) => {
      * Set original headers excluding CSP
      * using writeHead to avoid the default charset adding
      */
-    const headers = {}
+    const headers: Record<string, string> = {}
     response.headers.forEach((value, key) => {
       if (value === 'content-security-policy') {
-        // @ts-ignore
         headers[key] = value
       }
     })
