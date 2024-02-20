@@ -1,22 +1,22 @@
 # Solar Monitor Auth Proxy
 
-Panasonic社の[VBPM277](https://www2.panasonic.biz/jp/energy/solar_industrial/monitor/)や長州産業のCMCS-P04などの電力検出ユニットで使われている太陽光発電モニター内のWebアプリケーション「solar-monitor」用の認証プロキシです。
+An authentication proxy for the 'solar monitor', a Web front-end app of Panasonic VBPM277. It enhances access flexibility beyond LAN restrictions by proxying the default digest authentication.
 
-### 想定する使い方
+## Intended Use
 
-solar-monitorはダイジェスト認証でログインする仕組みのため、そのままではリバースプロキシからのアクセスができません。この認証プロキシを中継させることでダイジェスト認証を代理し、リバースプロキシ経由でもsolar-monitorにアクセスできるようになります。
+The solar monitor employs a digest authentication for login, and it does not allow access via a reverse proxy. By mediating through this authentication proxy, it proxies the digest authentication, enabling access to the solar monitor even through a reverse proxy.
 
-たとえばインターネットアクセス可能なリバースプロキシからもsolar-monitorへ接続できるので、自宅サーバとしての運用がやりやすくなります。
+For instance, this allows for connection to the solar monitor from an internet-accessible reverse proxy, facilitating its operation as a home server.
 
-### 注意点
+## Cautions
 
-- 認証プロキシ経由のアクセスでは標準のダイジェスト認証がバイパスされます。特にインターネットアクセスを可能にする場合は認証プロキシより上流で認証をかけるようにしてください
-- 前提として電力検出ユニットがLANに参加し、IPアドレスが固定されている必要があります
-- solar-monitorのIPアドレスへ直接接続できるネットワークにプロキシを設置する必要があります
+Access via the authentication proxy bypasses the standard digest authentication. Especially when enabling internet access, ensure to apply authentication upstream of the authentication proxy.
 
-### 環境変数
+As a prerequisite, the power detection unit must be part of the LAN with a fixed IP address.
+The proxy must be installed on a network that allows direct connection to the solar monitor's IP address.
 
-- **PROXY_BASE_URL** - 接続先となるsolar monitorのURL
-  - 例 `http://192.168.1.1` などのローカルIPアドレス。`http://solar-monitor.local`には未対応です
-- **PROXY_AUTH_USER** - solar-monitorのログインユーザー名
-- **PROXY_AUTH_PW** - solar-monitorのログインパスワード
+## Environment Variables
+
+- PROXY_BASE_URL - The URL for the solar monitor to connect to, such as a local IP address http://192.168.1.1. Does not support URLs like http://solar-monitor.local.
+- PROXY_AUTH_USER - The login username for the solar monitor.
+- PROXY_AUTH_PW - The login password for the solar monitor.
