@@ -30,9 +30,7 @@ app.get('*', async (req, res) => {
      */
     const headers: Record<string, string> = {}
     response.headers.forEach((value, key) => {
-      if (value === 'content-security-policy') {
-        headers[key] = value
-      }
+      headers[key] = value
     })
     res.writeHead(response.status, headers)
 
