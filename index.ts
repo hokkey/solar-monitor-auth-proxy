@@ -31,15 +31,13 @@ app.get('*', async (req, res) => {
     })
 
     /**
-     * Set original headers excluding CSP and X-Frame-Options
+     * Set original headers excluding CSP
      * using writeHead to avoid the default charset adding
      */
     const headers: Record<string, string> = {}
     const CSP = 'content-security-policy'
     response.headers.forEach((value, key) => {
-      if (key !== 'x-frame-options') {
-        headers[key] = value
-      }
+      headers[key] = value
     })
     headers[CSP] = CSP_VALUES
     res.writeHead(response.status, headers)
